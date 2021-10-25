@@ -536,6 +536,7 @@ export default class CemSendEmail extends LightningElement {
 
     uploadFiledAction(event) {
         // Get the list of uploaded files
+        /*
         const uploadedFiles = event.detail.files;
         console.log('uploadedFiles', uploadedFiles)
         
@@ -552,7 +553,22 @@ export default class CemSendEmail extends LightningElement {
         this.showInsertAttachmentComp = false;
         this.showAttachedItem = true;
     }
-    
+    */
+    const uploadedFiles = event.detail.files[0];
+        console.log('uploadedFiles',uploadedFiles.documentId)
+        this.attachedFileName=uploadedFiles.name;
+        this.attachedFileID=uploadedFiles.documentId;
+        console.log('this.attachedFileID',this.attachedFileID);
+       // alert("No. of files uploaded : " + uploadedFiles.length);
+        const toastEvent = new ShowToastEvent({
+            title:'Files uploaded successfully',
+            message:'No. of files uploaded ' + uploadedFiles.length,
+            variant:'success',
+        })
+        this.dispatchEvent(toastEvent);
+        this.showInsertAttachmentComp = false;
+        this.showAttachedItem = true;
+    }
         /*
         for (let i = 0; i < uploadedFiles.length; i++) {
             this.attachedFileName.push(uploadedFiles[i].name);
